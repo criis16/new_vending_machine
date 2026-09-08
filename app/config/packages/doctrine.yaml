@@ -2,6 +2,10 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
+        # Registrar el custom type del id de Coin
+        types:
+            coin_id: App\Coin\Infrastructure\Persistence\Doctrine\CoinIdType
+
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
@@ -14,12 +18,11 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            App\Coin:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/Coin/Infrastructure/Persistence/Doctrine'
+                prefix: 'App\Coin\Domain'
 
 when@test:
     doctrine:
