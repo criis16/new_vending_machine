@@ -2,6 +2,7 @@
 
 namespace App\Coin\Domain;
 
+use App\Coin\Domain\Exceptions\CoinWithNegativeQuantity;
 use App\Shared\Domain\ValueObject\IntQuantityValueObject;
 
 final class CoinQuantity extends IntQuantityValueObject
@@ -9,6 +10,17 @@ final class CoinQuantity extends IntQuantityValueObject
     public static function initialize(): self
     {
         return new self(1);
+    }
+
+    public static function create(int $quantity): self
+    {
+        $coinQuantity = new self($quantity);
+
+        if ($coinQuantity->isNegativeValue()) {
+            throw new CoinWithNegativeQuantity();
+        }
+
+        return $coinQuantity;
     }
 
     public function increment(): self
