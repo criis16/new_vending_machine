@@ -5,7 +5,7 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <embeddable name="App\Coin\Domain\CoinQuantity">
-        <field name="value" type="int" column="quantity" />
+        <field name="value" type="integer" column="quantity" />
     </embeddable>
 
 </doctrine-mapping>
