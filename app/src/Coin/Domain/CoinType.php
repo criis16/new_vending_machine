@@ -13,6 +13,11 @@ enum CoinType: string
 
     public static function fromValue(float $value): self
     {
-        return self::tryFrom($value) ?? throw new CoinNotValid($value);
+        foreach (self::cases() as $case) {
+            if ((float)$case->value === $value) {
+                return $case;
+            }
+        }
+        throw new CoinNotValid($value);
     }
 }

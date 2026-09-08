@@ -8,7 +8,7 @@ final class CoinQuantity extends IntQuantityValueObject
 {
     public static function initialize(): self
     {
-        return new self(0);
+        return new self(1);
     }
 
     public function increment(): self
