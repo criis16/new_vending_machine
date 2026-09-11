@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Domain\ValueObject;
 
 use InvalidArgumentException;
@@ -12,9 +14,9 @@ abstract class UuidValueObject
         $this->ensureIsValidUuid($value);
     }
 
-    final public static function generate(): self
+    final public static function generate(): static
     {
-        return new static(Uuid::v4());
+        return new static((string)Uuid::v4());
     }
 
     final public function value(): string
