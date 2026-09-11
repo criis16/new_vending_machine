@@ -36,8 +36,9 @@ final readonly class DoctrineCriteriaConverter
         return new DoctrineCriteria(
             $this->buildExpression($this->criteria),
             $this->formatOrder($this->criteria),
-            $this->criteria->offset(),
-            $this->criteria->limit()
+            $this->criteria->offset() ?? 0,
+            $this->criteria->limit(),
+            true
         );
     }
 
