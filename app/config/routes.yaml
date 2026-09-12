@@ -9,3 +9,8 @@
 
 controllers:
     resource: routing.controllers
+
+insert_coin:
+    path: /insert_coin
+    controller: App\Coin\Controllers\CoinsInsertController
+    methods: ['POST']

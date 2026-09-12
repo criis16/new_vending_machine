@@ -18,6 +18,12 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/Coin/Controllers/'
+
+    App\Coin\Controllers\:
+        resource: '../src/Coin/Controllers/'
+        tags: [ 'controller.service_arguments' ]
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
