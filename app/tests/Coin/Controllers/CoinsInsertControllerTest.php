@@ -113,6 +113,24 @@ final class CoinsInsertControllerTest extends WebTestCase
         self::assertSame([], $this->coinsInDb());
     }
 
+    public function testItReturnsAnInternalServerErrorWhenTheRepositoryFails(): void
+    {
+        $repository = $this->createMock(CoinsRepository::class);
+        $repository->expects(self::once())
+            ->method('searchByCriteria')
+            ->willThrowException(new \RuntimeException('Internal database failure'));
+
+        self::getContainer()->set(CoinsRepository::class, $repository);
+
+        $this->insertCoin(0.10);
+
+        self::assertResponseStatusCodeSame(500);
+        self::assertJsonStringEqualsJsonString(
+            '{"message": "Error inserting coin: Internal database failure"}',
+            $this->client->getResponse()->getContent()
+        );
+    }
+
     private function insertCoin(float $value): void
     {
         $this->client->request(
