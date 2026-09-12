@@ -1,4 +1,4 @@
-.PHONY: up down build bash composer migrate status logs stop test
+.PHONY: up down build bash composer migrate status logs stop test init-test-db
 
 up:
 	docker compose up -d --build
@@ -34,6 +34,20 @@ status:
 
 logs:
 	docker compose logs -f
+
+init-test-db:
+		docker compose exec -T mysql mysql -u root -proot < etc/databases/create_test_db.sql
+
+init-db-tables:
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony' < etc/databases/coins.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony' < etc/databases/items.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony' < etc/databases/machine_status.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony' < etc/databases/mutations.sql
+
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony_test' < etc/databases/coins.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony_test' < etc/databases/items.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony_test' < etc/databases/machine_status.sql
+		docker compose exec -T mysql sh -c 'exec mysql -u root -proot symfony_test' < etc/databases/mutations.sql
 
 %:
 	@:
