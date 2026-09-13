@@ -112,7 +112,7 @@ final class DoctrineCoinsRepositoryTest extends KernelTestCase
         $coin = Coin::create(CoinId::generate(), CoinValue::create(0.10), CoinQuantity::initialize());
         $this->repository->save($coin);
 
-        $coin->updateQuantity(CoinQuantity::create(2));
+        $coin->increaseQuantity();
         $this->repository->save($coin);
         $this->entityManager->clear();
 

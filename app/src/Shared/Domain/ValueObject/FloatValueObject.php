@@ -4,7 +4,7 @@ namespace App\Shared\Domain\ValueObject;
 
 abstract class FloatValueObject
 {
-    private const float ZERO_QUANTITY = 0.0;
+    protected const float ZERO_QUANTITY = 0.0;
 
     public function __construct(protected float $value)
     {

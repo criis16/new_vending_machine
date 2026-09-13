@@ -5,6 +5,7 @@ doctrine:
         # Registrar el custom type del id de Coin
         types:
             coin_id: App\Coin\Infrastructure\Persistence\Doctrine\CoinIdType
+            machine_status_id: App\MachineStatus\Infrastructure\Persistence\Doctrine\MachineStatusIdType
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
@@ -23,6 +24,11 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Coin/Infrastructure/Persistence/Doctrine'
                 prefix: 'App\Coin\Domain'
+            App\MachineStatus:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/MachineStatus/Infrastructure/Persistence/Doctrine'
+                prefix: 'App\MachineStatus\Domain'
 
 when@test:
     doctrine:

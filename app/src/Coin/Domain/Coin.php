@@ -36,8 +36,8 @@ final class Coin
         return $this->quantity;
     }
 
-    public function updateQuantity(CoinQuantity $newQuantity): void
+    public function increaseQuantity(): void
     {
-        $this->quantity = $newQuantity;
+        $this->quantity = $this->quantity->increment();
     }
 }
