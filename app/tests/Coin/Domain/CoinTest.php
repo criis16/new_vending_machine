@@ -31,10 +31,8 @@ final class CoinTest extends TestCase
             CoinQuantity::initialize()
         );
 
-        $newQuantity = $coin->quantity()->increment();
-        $coin->updateQuantity($newQuantity);
+        $coin->increaseQuantity();
 
-        self::assertSame($newQuantity, $coin->quantity());
         self::assertSame(2, $coin->quantity()->value());
     }
 }
