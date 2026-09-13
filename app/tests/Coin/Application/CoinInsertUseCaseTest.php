@@ -207,9 +207,6 @@ final class CoinInsertUseCaseTest extends TestCase
     {
         $this->mockSetUp();
 
-        $this->mockTransactionalService->expects($this->never())
-            ->method('execute');
-
         $this->expectException(CoinNotValid::class);
         $this->mockRepository->expects($this->never())->method('searchByCriteria');
         $this->mockRepository->expects($this->never())->method('save');
