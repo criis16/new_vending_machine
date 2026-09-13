@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS items
     PRIMARY KEY (id)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
 
+DELIMITER $$
+
 CREATE TRIGGER after_items_insert
     AFTER INSERT
     ON items
@@ -19,7 +21,7 @@ BEGIN
     INSERT INTO mutations (table_name, operation, new_value, mutation_timestamp)
     VALUES ('items', 'INSERT',
             JSON_OBJECT('id', new.id, 'name', new.name, 'quantity', new.quantity, 'price', new.price), NOW());
-END;
+END$$
 
 CREATE TRIGGER after_items_update
     AFTER UPDATE
@@ -32,7 +34,7 @@ BEGIN
             JSON_OBJECT('id', old.id, 'name', old.name, 'quantity', old.quantity, 'price', old.price),
             JSON_OBJECT('id', new.id, 'name', new.name, 'quantity', new.quantity, 'price', new.price),
             NOW());
-END;
+END$$
 
 CREATE TRIGGER after_items_delete
     AFTER DELETE
@@ -42,4 +44,6 @@ BEGIN
     INSERT INTO mutations (table_name, operation, old_value, mutation_timestamp)
     VALUES ('items', 'DELETE',
             JSON_OBJECT('id', old.id, 'name', old.name, 'quantity', old.quantity, 'price', old.price), NOW());
-END;
+END$$
+
+DELIMITER ;
