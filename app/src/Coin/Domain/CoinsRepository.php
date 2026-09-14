@@ -9,4 +9,6 @@ interface CoinsRepository
     public function save(Coin $coin): void;
 
     public function searchByCriteria(Criteria $criteria): array;
+
+    public function findAll(): array;
 }
