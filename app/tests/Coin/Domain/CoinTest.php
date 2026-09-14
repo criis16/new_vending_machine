@@ -23,7 +23,7 @@ final class CoinTest extends TestCase
         self::assertSame($quantity, $coin->quantity());
     }
 
-    public function testItUpdatesQuantity(): void
+    public function testItIncreasesQuantity(): void
     {
         $coin = Coin::create(
             CoinId::generate(),
@@ -34,5 +34,19 @@ final class CoinTest extends TestCase
         $coin->increaseQuantity();
 
         self::assertSame(2, $coin->quantity()->value());
+    }
+
+    public function testItDecreasesQuantity(): void
+    {
+        $coin = Coin::create(
+            CoinId::generate(),
+            CoinValue::create(0.25),
+            CoinQuantity::initialize()
+        );
+
+        $coin->increaseQuantity();
+        $coin->decreaseQuantity(CoinQuantity::create(1));
+
+        self::assertSame(1, $coin->quantity()->value());
     }
 }
