@@ -41,4 +41,11 @@ final class MachineStatusBalanceTest extends TestCase
         self::assertSame(0.15, $result->value());
         self::assertSame(0.05, $balance->value());
     }
+
+    public function testItHasEmptyValue(): void
+    {
+        $balance = MachineStatusBalance::initialize();
+
+        self::assertTrue($balance->isEmpty());
+    }
 }
