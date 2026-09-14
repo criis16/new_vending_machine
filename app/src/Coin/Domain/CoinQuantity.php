@@ -27,4 +27,15 @@ final class CoinQuantity extends IntQuantityValueObject
     {
         return new self($this->value() + 1);
     }
+
+    public function subtract(self $coinQuantity): self
+    {
+        $newQuantity = $this->value() - $coinQuantity->value();
+
+        if ($newQuantity < 0) {
+            throw new CoinWithNegativeQuantity();
+        }
+
+        return new self($newQuantity);
+    }
 }

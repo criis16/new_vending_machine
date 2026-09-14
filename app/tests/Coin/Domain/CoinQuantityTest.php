@@ -41,4 +41,21 @@ final class CoinQuantityTest extends TestCase
 
         self::assertSame(6, $incrementedQuantity->value());
     }
+
+    public function testItSubtractsTheQuantity(): void
+    {
+        $coinQuantity = CoinQuantity::create(5);
+        $decrementedCoinQuantity = CoinQuantity::create(2);
+        $decrementedQuantity = $coinQuantity->subtract($decrementedCoinQuantity);
+
+        self::assertSame(3, $decrementedQuantity->value());
+    }
+
+    public function testItRejectsSubtractingMoreThanAvailable(): void
+    {
+        $coinQuantity = CoinQuantity::create(5);
+        $decrementedCoinQuantity = CoinQuantity::create(10);
+        $this->expectException(CoinWithNegativeQuantity::class);
+        $coinQuantity->subtract($decrementedCoinQuantity);
+    }
 }
