@@ -43,4 +43,16 @@ final class MachineStatusTest extends TestCase
 
         self::assertSame(0.15, $machineStatus->balance()->value());
     }
+
+    public function testItResetsTheBalance(): void
+    {
+        $machineStatus = MachineStatus::create(
+            MachineStatusId::generate(),
+            MachineStatusBalance::create(0.50)
+        );
+
+        $machineStatus->resetBalance();
+
+        self::assertSame(0.00, $machineStatus->balance()->value());
+    }
 }

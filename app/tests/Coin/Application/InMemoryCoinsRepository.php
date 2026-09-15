@@ -20,4 +20,9 @@ final class InMemoryCoinsRepository implements CoinsRepository
     {
         return array_values($this->coins);
     }
+
+    public function findAll(): array
+    {
+        return array_values($this->coins);
+    }
 }

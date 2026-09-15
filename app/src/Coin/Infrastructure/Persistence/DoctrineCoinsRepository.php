@@ -33,4 +33,9 @@ final class DoctrineCoinsRepository implements CoinsRepository
             ->matching($doctrineCriteria)
             ->toArray();
     }
+
+    public function findAll(): array
+    {
+        return $this->entityManager->getRepository(Coin::class)->findAll();
+    }
 }

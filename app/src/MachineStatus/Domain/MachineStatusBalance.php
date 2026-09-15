@@ -27,4 +27,9 @@ final class MachineStatusBalance extends FloatValueObject
     {
         return new self(round($this->value + $amount->value(), 2));
     }
+
+    public function isEmpty(): bool
+    {
+        return $this->value === self::ZERO_QUANTITY;
+    }
 }

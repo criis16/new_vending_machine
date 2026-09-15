@@ -30,4 +30,9 @@ final class MachineStatus
     {
         $this->balance = $this->balance->add($amount);
     }
+
+    public function resetBalance(): void
+    {
+        $this->balance = MachineStatusBalance::initialize();
+    }
 }

@@ -53,11 +53,6 @@ final class DoctrineCoinsRepositoryTest extends KernelTestCase
         parent::tearDown();
     }
 
-    private function findAll(): array
-    {
-        return $this->repository->searchByCriteria(new Criteria(Filters::none(), Order::none()));
-    }
-
     private function findWithFilter(string $field, string $operator, mixed $value): array
     {
         return $this->repository->searchByCriteria(new Criteria(
@@ -72,7 +67,7 @@ final class DoctrineCoinsRepositoryTest extends KernelTestCase
         $this->repository->save($coin);
         $this->entityManager->clear();
 
-        $coins = $this->findAll();
+        $coins = $this->repository->findAll();
         self::assertCount(1, $coins);
         self::assertSame(0.10, $coins[0]->value()->value());
         self::assertSame(1, $coins[0]->quantity()->value());
@@ -116,7 +111,7 @@ final class DoctrineCoinsRepositoryTest extends KernelTestCase
         $this->repository->save($coin);
         $this->entityManager->clear();
 
-        $coins = $this->findAll();
+        $coins = $this->repository->findAll();
         self::assertCount(1, $coins);
         self::assertSame(2, $coins[0]->quantity()->value());
     }

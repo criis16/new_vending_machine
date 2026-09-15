@@ -40,4 +40,9 @@ final class Coin
     {
         $this->quantity = $this->quantity->increment();
     }
+
+    public function decreaseQuantity(CoinQuantity $coinQuantity): void
+    {
+        $this->quantity = $this->quantity->subtract($coinQuantity);
+    }
 }
