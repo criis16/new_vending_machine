@@ -14,3 +14,8 @@ insert_coin:
     path: /insert_coin
     controller: App\Coin\Controllers\CoinsInsertController
     methods: ['POST']
+
+return_coins:
+    path: /return_coins
+    controller: App\Coin\Controllers\CoinsGetBackController
+    methods: ['GET']
