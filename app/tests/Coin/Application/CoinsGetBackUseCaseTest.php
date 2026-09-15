@@ -2,7 +2,6 @@
 
 namespace App\Tests\Coin\Application;
 
-use App\Coin\Application\CoinsGetBackDTO;
 use App\Coin\Application\CoinsGetBackUseCase;
 use App\Coin\Domain\Coin;
 use App\Coin\Domain\CoinChangeCalculator;
