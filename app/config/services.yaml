@@ -20,9 +20,14 @@ services:
         resource: '../src/'
         exclude:
             - '../src/Coin/Controllers/'
+            - '../src/MachineStatus/Controllers/'
 
     App\Coin\Controllers\:
         resource: '../src/Coin/Controllers/'
+        tags: [ 'controller.service_arguments' ]
+
+    App\MachineStatus\Controllers\:
+        resource: '../src/MachineStatus/Controllers/'
         tags: [ 'controller.service_arguments' ]
 
     # add more service definitions when explicit configuration is needed
