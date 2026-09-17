@@ -38,4 +38,9 @@ final class CoinQuantity extends IntQuantityValueObject
 
         return new self($newQuantity);
     }
+
+    public function add(self $coinQuantity): self
+    {
+        return new self($this->value() + $coinQuantity->value());
+    }
 }

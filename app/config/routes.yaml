@@ -13,9 +13,14 @@ controllers:
 insert_coin:
     path: /insert_coin
     controller: App\Coin\Controllers\CoinsInsertController
-    methods: ['POST']
+    methods: [ 'POST' ]
 
 return_coins:
     path: /return_coins
     controller: App\Coin\Controllers\CoinsGetBackController
-    methods: ['GET']
+    methods: [ 'GET' ]
+
+service_machine:
+    path: /service
+    controller: App\MachineStatus\Controllers\ServiceMachineController
+    methods: [ 'POST' ]
