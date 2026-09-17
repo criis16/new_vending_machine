@@ -2,8 +2,6 @@
 
 namespace App\Coin\Domain;
 
-use Traversable;
-
 final readonly class CoinChange implements \IteratorAggregate
 {
     /** @param array<string, int> $units keyed by CoinType value */
