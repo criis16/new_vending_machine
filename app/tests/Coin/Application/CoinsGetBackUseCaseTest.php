@@ -2,9 +2,11 @@
 
 namespace App\Tests\Coin\Application;
 
+use App\Coin\Application\CoinChangeRefund;
 use App\Coin\Application\CoinsGetBackUseCase;
 use App\Coin\Domain\Coin;
 use App\Coin\Domain\CoinChangeCalculator;
+use App\Coin\Domain\CoinChangeDispenser;
 use App\Coin\Domain\CoinId;
 use App\Coin\Domain\CoinQuantity;
 use App\Coin\Domain\CoinsRepository;
@@ -26,7 +28,6 @@ final class CoinsGetBackUseCaseTest extends TestCase
     private CoinsGetBackUseCase $useCase;
     private CoinsRepository $coinsRepository;
     private MachineStatusRepository $machineStatusRepository;
-    private TransactionalService $transactionalService;
 
     private CoinsRepository|MockObject $mockCoinsRepository;
     private MachineStatusRepository|MockObject $mockMachineStatusRepository;
@@ -37,13 +38,17 @@ final class CoinsGetBackUseCaseTest extends TestCase
     {
         $this->coinsRepository = new InMemoryCoinsRepository();
         $this->machineStatusRepository = new InMemoryMachineStatusRepository();
-        $this->transactionalService = new InMemoryTransactionalService();
+        $transactionalService = new InMemoryTransactionalService();
 
         $this->useCase = new CoinsGetBackUseCase(
-            $this->coinsRepository,
             $this->machineStatusRepository,
-            new CoinChangeCalculator(),
-            $this->transactionalService
+            $transactionalService,
+            new CoinChangeRefund(
+                $this->coinsRepository,
+                $this->machineStatusRepository,
+                new CoinChangeCalculator(),
+                new CoinChangeDispenser()
+            )
         );
     }
 
@@ -54,10 +59,14 @@ final class CoinsGetBackUseCaseTest extends TestCase
         $this->mockTransactionalService = $this->createMock(TransactionalService::class);
 
         $this->mockUseCase = new CoinsGetBackUseCase(
-            $this->mockCoinsRepository,
             $this->mockMachineStatusRepository,
-            new CoinChangeCalculator(),
-            $this->mockTransactionalService
+            $this->mockTransactionalService,
+            new CoinChangeRefund(
+                $this->mockCoinsRepository,
+                $this->mockMachineStatusRepository,
+                new CoinChangeCalculator(),
+                new CoinChangeDispenser()
+            )
         );
     }
 
