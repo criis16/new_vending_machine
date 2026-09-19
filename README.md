@@ -1,7 +1,11 @@
 # Vending Machine API
 
-REST API for a drink vending machine with change, built with Symfony 8.1,
-PHP 8.5 and MySQL 8.4, fully orchestrated with Docker Compose.
+This is a practice project to put **hexagonal architecture** into practice
+together with **Domain-Driven Design (DDD)**, applied to a real case: a drink
+vending machine with change.
+
+The API is built with Symfony 8.1, PHP 8.5 and MySQL 8.4, fully orchestrated
+with Docker Compose.
 
 The codebase is organized in modules following a DDD architecture:
 `Coin`, `Item` and `MachineStatus`.
