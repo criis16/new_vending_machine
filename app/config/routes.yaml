@@ -24,3 +24,8 @@ service_machine:
     path: /service
     controller: App\MachineStatus\Controllers\ServiceMachineController
     methods: [ 'POST' ]
+
+item:
+    path: /item
+    controller: App\Item\Controllers\BuyItemController
+    methods: [ 'GET' ]
